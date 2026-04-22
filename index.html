@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliCompiler | AI-Powered C++ IDE</title>
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo">
+                <span class="icon">🚀</span>
+                <h1>IntelliCompiler</h1>
+            </div>
+            <div class="status-steps">
+                <div class="step active" id="step-1">Lexical</div>
+                <div class="step-line"></div>
+                <div class="step" id="step-2">Syntax</div>
+                <div class="step-line"></div>
+                <div class="step" id="step-3">Semantic</div>
+                <div class="step-line"></div>
+                <div class="step" id="step-4">AI Correction</div>
+            </div>
+        </header>
+
+        <main>
+            <div class="editor-section card">
+                <div class="card-header">
+                    <h3>Source Code</h3>
+                    <div class="actions">
+                        <button id="btn-lexical" class="btn primary">Lexical Analysis</button>
+                        <button id="btn-syntax" class="btn secondary" disabled>Syntax Analysis</button>
+                        <button id="btn-semantic" class="btn secondary" disabled>Semantic Analysis</button>
+                        <button id="btn-ai" class="btn ai-pulse" disabled>AI Correction</button>
+                    </div>
+                </div>
+                <div class="editor-wrapper">
+                    <textarea id="code-editor"></textarea>
+                </div>
+            </div>
+
+            <div class="results-section">
+                <!-- Lexical Results -->
+                <div id="lexical-results" class="result-card card hidden">
+                    <div class="card-header">
+                        <h3>Lexical Phase Results</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="errors-list" id="lex-errors"></div>
+                        <div class="table-wrapper">
+                            <table id="tokens-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Value</th>
+                                        <th>Line</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Syntax Results -->
+                <div id="syntax-results" class="result-card card hidden">
+                    <div class="card-header">
+                        <h3>Syntax Phase Results</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="errors-list" id="syn-errors"></div>
+                        <div class="tree-view" id="parse-tree"></div>
+                    </div>
+                </div>
+
+                <!-- Semantic Results -->
+                <div id="semantic-results" class="result-card card hidden">
+                    <div class="card-header">
+                        <h3>Semantic Phase Results</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="errors-list" id="sem-errors"></div>
+                        <div class="warnings-list" id="sem-warnings"></div>
+                        <div class="table-wrapper">
+                            <table id="symbols-table">
+                                <thead>
+                                    <tr>
+                                        <th>Variable</th>
+                                        <th>Type</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Correction Results -->
+                <div id="ai-results" class="result-card card hidden">
+                    <div class="card-header">
+                        <h3>AI Correction</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="ai-explanation" id="ai-explanation"></div>
+                        <div class="code-diff-container">
+                            <h4>Suggested Fix:</h4>
+                            <div id="ai-code-preview" class="code-preview"></div>
+                        </div>
+                        <div class="ai-tip" id="ai-tip"></div>
+                        <div class="ai-actions">
+                            <button id="btn-apply-fix" class="btn success">Apply Correction</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-left">
+                <button id="btn-download" class="btn ghost hidden">Download corrected_code.cpp</button>
+            </div>
+            <p>&copy; 2026 IntelliCompiler. Powered by AI.</p>
+        </footer>
+    </div>
+
+    <!-- Modal for loading -->
+    <div id="loading-overlay" class="overlay hidden">
+        <div class="loader"></div>
+        <p>AI is thinking...</p>
+    </div>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/clike/clike.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
